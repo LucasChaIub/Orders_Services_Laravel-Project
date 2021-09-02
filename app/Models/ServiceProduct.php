@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceProduct extends Model
 {
     use HasFactory;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'description',
+        'value',
+        'product',
+        'service'
+    ];
 }
