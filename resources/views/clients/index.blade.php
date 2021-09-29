@@ -7,13 +7,16 @@
     <title>Listagem de Clientes</title>
 </head>
 <body>
-    <h3>Clientes</h3>
+    <h1>Clientes</h1>
     
     <a href="{{ route('clients.create') }}">Criar Cliente</a>
 
     <ul>
         @foreach ($clients as $client)
-            <li>{{ $client }}</li>
+            <li>
+                <a href="{{ route('clients.show', $client) }}">Visualizar</a>
+                {{ $client }}
+            </li>
         @endforeach
     </ul>
 </body>
