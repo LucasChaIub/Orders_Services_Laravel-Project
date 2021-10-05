@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use Facade\FlareClient\Http\Client as HttpClient;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -37,7 +38,18 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('clients');
+        $validated = $request->validate([
+            'name' => ['required'],
+            'lastname' => ['required'],
+            'email' => ['required'],
+            'cpf' => ['nullable', 'digits:11'],
+            'cnpj' => ['nullable', 'digits:14'],
+        ]);
+
+        // $client = Client::create($request->only(['name', 'lastname', 'email', 'cpf', 'cnpj']));
+        $client = Client::create($validated);
+
+        return redirect()->route('clients.show', $client);
     }
 
     /**

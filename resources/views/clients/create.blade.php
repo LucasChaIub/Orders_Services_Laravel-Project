@@ -11,8 +11,31 @@
     
     <a href="{{ route('clients.index') }}">Voltar</a>
 
-    <form>
-        {{-- TODO --}}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('clients.store') }}" method="POST">
+        <div>
+            <label>Nome: </label>
+            <input type="text" name="name">
+        </div>
+        <div>
+            <label>Sobrenome: </label>
+            <input type="text" name="lastname">
+        </div>
+        <div>
+            <label>E-mail: </label>
+            <input type="text" name="email">
+        </div>
+
+        <button type="submit">Cadastrar Cliente</button>
     </form>
 </body>
 </html>
