@@ -14,8 +14,13 @@ class AlterUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('profile_picture')->nullable();
-            $table->foreignId('company_id')->constrained();
+            $table->after('name', function ($table) {
+                $table->foreignId('company_id')->nullable()->constrained();
+            });
+
+            $table->after('remember_token', function ($table) {
+                $table->string('profile_picture')->nullable();
+            });
         });
     }
     /* 
