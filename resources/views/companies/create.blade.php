@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Cadastro de Cliente
+            Cadastro de Empresa
         </h2>
     </x-slot>
     
@@ -19,23 +19,19 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('clients.store') }}" method="POST">
+                    <form action="{{ route('companies.store') }}" method="POST">
                         @csrf
                         <div>
                             <label>Nome: </label>
                             <input type="text" name="name">
                         </div>
                         <div>
-                            <label>Sobrenome: </label>
-                            <input type="text" name="lastname">
+                            <label>Slug: </label>
+                            <input type="text" name="slug">
                         </div>
                         <div>
-                            <label>E-mail: </label>
-                            <input type="text" name="email">
-                        </div>
-                        <div>
-                            <label>CPF: </label>
-                            <input type="text" name="cpf">
+                            <label>Logo: </label>
+                            <input type="file" name="logo">
                         </div>
                         <div>
                             <label>CNPJ: </label>
@@ -55,7 +51,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <a href="{{ route('clients.index') }}">Voltar</a>
+                    <a href="{{ route('companies.index') }}">Voltar</a>
                 </div>
             </div>
         </div>
