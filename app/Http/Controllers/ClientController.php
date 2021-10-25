@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use Facade\FlareClient\Http\Client as HttpClient;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ClientController extends Controller
 {
@@ -83,7 +84,17 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        return redirect('clients');
+        $validated = $request->validate([
+            'name' => ['required'],
+            'lastname' => ['required'],
+            'email' => ['required', 'email', Rule::unique('clients', 'email')->ignore($client->id)],
+            'cpf' => ['nullable', 'digits:11', Rule::unique('clients', 'cpf')->ignore($client->id)],
+            'cnpj' => ['nullable', 'digits:14', Rule::unique('clients', 'cnpj')->ignore($client->id)],
+        ]);
+
+        $client->update($validated);
+
+        return redirect()->route('clients.show', $client);
     }
 
     /**

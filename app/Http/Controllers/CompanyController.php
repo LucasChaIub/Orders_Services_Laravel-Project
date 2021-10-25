@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CompanyController extends Controller
 {
@@ -39,12 +40,11 @@ class CompanyController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required'],
-            'slug' => ['required', 'unique:companies,slug'],
             'logo' => ['nullable'],
+            'slug' => ['required', 'unique:companies,slug'],
             'cnpj' => ['nullable', 'digits:14', 'unique:companies,cnpj'],
         ]);
 
-        // $client = Client::create($request->only(['name', 'lastname', 'email', 'cpf', 'cnpj']));
         $company = Company::create($validated);
 
         return redirect()->route('companies.show', $company);
@@ -81,7 +81,16 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        return redirect('companies');
+        $validated = $request->validate([
+            'name' => ['required'],
+            'logo' => ['nullable'],
+            'slug' => ['required'],
+            'cnpj' => ['nullable', 'digits:14', Rule::unique('companies', 'cnpj')->ignore($company->id)],
+        ]);
+
+        $company->update($validated);
+
+        return redirect()->route('companies.show', $company);
     }
 
     /**

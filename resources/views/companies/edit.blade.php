@@ -9,8 +9,39 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form>
-                        {{-- TODO --}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('companies.update', $company) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div>
+                            <label>Nome: </label>
+                            <input type="text" name="name"  value="{{ $company->name }}">
+                        </div>
+                        <div>
+                            <label>Logo: </label>
+                            <input type="file" name="logo" value="{{ $company->logo }}">
+                        </div>
+                        <div>
+                            <label>Slug: </label>
+                            <input type="text" name="slug" value="{{ $company->slug }}">
+                        </div>
+                        <div>
+                            <label>CNPJ: </label>
+                            <input type="text" name="cnpj" value="{{ $company->cnpj }}">
+                        </div>
+                
+                        <div>
+                            <x-button type="submit" class="mb-4">Atualizar Empresa</x-button>
+                        </div>           
                     </form>
                 </div>
             </div>
