@@ -26,10 +26,6 @@
                             <input type="text" name="name">
                         </div>
                         <div>
-                            <label>Slug: </label>
-                            <input type="text" name="slug">
-                        </div>
-                        <div>
                             <label>Logo: </label>
                             <input type="file" name="logo">
                         </div>

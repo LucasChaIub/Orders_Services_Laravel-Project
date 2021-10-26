@@ -11,7 +11,6 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h1 class="font-semibold text-xl text-gray-800 leading-tight">Detalhes da Empresa {{ $company->name }}</h1>
                     <p>Name - {{ $company->name }}</p>
-                    <p>Slug - {{ $company->slug }}</p>
                     <p>Logo - {{ $company->logo }}</p>
                     <p>CNPJ - {{ $company->cnpj }}</p>
                     <x-button><a href="{{ route('companies.edit', $company) }}">Editar</a></x-button> 

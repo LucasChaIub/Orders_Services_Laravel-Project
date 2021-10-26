@@ -31,14 +31,9 @@
                             <input type="file" name="logo" value="{{ $company->logo }}">
                         </div>
                         <div>
-                            <label>Slug: </label>
-                            <input type="text" name="slug" value="{{ $company->slug }}">
-                        </div>
-                        <div>
                             <label>CNPJ: </label>
                             <input type="text" name="cnpj" value="{{ $company->cnpj }}">
                         </div>
-                
                         <div>
                             <x-button type="submit" class="mb-4">Atualizar Empresa</x-button>
                         </div>           

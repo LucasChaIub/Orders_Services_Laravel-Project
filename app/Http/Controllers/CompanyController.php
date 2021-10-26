@@ -41,7 +41,6 @@ class CompanyController extends Controller
         $validated = $request->validate([
             'name' => ['required'],
             'logo' => ['nullable'],
-            'slug' => ['required', 'unique:companies,slug'],
             'cnpj' => ['nullable', 'digits:14', 'unique:companies,cnpj'],
         ]);
 
@@ -84,7 +83,6 @@ class CompanyController extends Controller
         $validated = $request->validate([
             'name' => ['required'],
             'logo' => ['nullable'],
-            'slug' => ['required'],
             'cnpj' => ['nullable', 'digits:14', Rule::unique('companies', 'cnpj')->ignore($company->id)],
         ]);
 
