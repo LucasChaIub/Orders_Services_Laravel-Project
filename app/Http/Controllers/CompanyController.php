@@ -40,9 +40,13 @@ class CompanyController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required'],
-            'logo' => ['nullable'],
+            'logo' => ['nullable', 'image'],
             'cnpj' => ['nullable', 'digits:14', 'unique:companies,cnpj'],
         ]);
+
+        if ($request->hasFile('logo')) {
+            $request->file('logo')->storePublicly('companies', 'public');
+        }
 
         $company = Company::create($validated);
 
@@ -80,11 +84,16 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
+        
         $validated = $request->validate([
             'name' => ['required'],
-            'logo' => ['nullable'],
+            'logo' => ['nullable', 'image'],
             'cnpj' => ['nullable', 'digits:14', Rule::unique('companies', 'cnpj')->ignore($company->id)],
         ]);
+        
+        if ($request->hasFile('logo')) {
+            $request->file('logo')->storePublicly('companies', 'public');
+        }
 
         $company->update($validated);
 
@@ -99,6 +108,8 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        return redirect('companies');
+        $company->delete();
+
+        return redirect()->route('companies.index');
     }
 }

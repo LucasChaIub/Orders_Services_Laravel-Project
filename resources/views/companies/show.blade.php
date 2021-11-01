@@ -13,7 +13,18 @@
                     <p>Name - {{ $company->name }}</p>
                     <p>Logo - {{ $company->logo }}</p>
                     <p>CNPJ - {{ $company->cnpj }}</p>
-                    <x-button><a href="{{ route('companies.edit', $company) }}">Editar</a></x-button> 
+                    <div style="padding-top: 1rem">
+                        <x-button><a href="{{ route('companies.edit', $company) }}">Editar</a></x-button> 
+                    </div>
+                    <div style="padding-top: 0.5rem">
+                        <form action="{{ route('companies.destroy', $company) }}" method="POST">
+                            @csrf 
+                            @method('DELETE')
+                            <x-button type="submit">
+                                Remover
+                            </x-button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

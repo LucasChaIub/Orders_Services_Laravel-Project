@@ -19,7 +19,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('companies.store') }}" method="POST">
+                    <form action="{{ route('companies.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div>
                             <label>Nome: </label>
@@ -33,7 +33,6 @@
                             <label>CNPJ: </label>
                             <input type="text" name="cnpj">
                         </div>
-                
                         <div>
                             <x-button type="submit" class="mb-4">Cadastrar</x-button>
                         </div>           

@@ -15,7 +15,18 @@
                     <p>CPF - {{ $client->cpf }}</p>
                     <p>CNPJ - {{ $client->cnpj }}</p>
                     <p>E-mail - {{ $client->email }}</p>
-                    <x-button><a href="{{ route('clients.edit', $client) }}">Editar</a></x-button> 
+                    <div style="padding-top: 1rem">
+                        <x-button><a href="{{ route('clients.edit', $client) }}">Editar</a></x-button>
+                    </div>
+                    <div style="padding-top: 0.5rem">
+                        <form action="{{ route('clients.destroy', $client) }}" method="POST">
+                            @csrf 
+                            @method('DELETE')
+                            <x-button type="submit">
+                                Remover
+                            </x-button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,4 +41,6 @@
             </div>
         </div>
     </div>
+
+    
 </x-app-layout>

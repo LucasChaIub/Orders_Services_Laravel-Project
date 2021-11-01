@@ -19,7 +19,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('companies.update', $company) }}" method="POST">
+                    <form action="{{ route('companies.update', $company) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div>
